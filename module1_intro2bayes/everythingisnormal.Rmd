@@ -1,0 +1,110 @@
+---
+title: "Introduction to Bayesian inference - everything's normal"
+author: "Leontine Alkema"
+date: "July 7, 2024"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggplot2)
+```
+
+# Introduction
+This notebook provides an introduction to Bayesian inference using a normal likelihood and a normal prior. We will calculate the posterior mean and variance, obtain a credible interval, and plot the prior, likelihood, and posterior together.
+
+The set up used, using the names of the parameters and the data in this notebook, is as follows:  
+- Prior for mu: mu ~ N(mean_muprior, sd_muprior^2),  
+- Likelihood function y|mu ~ N(mu, sd_y^2)
+
+
+# Functions
+
+Here are some functions to calculate the posterior mean and variance, obtain a credible interval, and plot prior, normalized likelihood, and posterior. Depending on what you want to get out of this exercise, you can use these functions as is (see example usage below) or check the code to confirm that the calculations correspond to what we discussed in unit 3. 
+
+
+```{r}
+summ  <- function(y, sd_y, mean_muprior, sd_muprior){
+  sd_mupost <- sqrt(1/(1/sd_muprior^2 + 1/sd_y^2))
+  mean_mupost <- (mean_muprior/(sd_muprior^2) + y/(sd_y^2))*(sd_mupost^2)
+  return(tibble(mean = mean_mupost, sd = sd_mupost))
+}
+```
+
+```{r}
+get_ci <- function(y, sd_y, mean_muprior, sd_muprior, alpha = 0.95){
+  res <- summ(y = y, sd_y = sd_y, mean_muprior = mean_muprior, sd_muprior = sd_muprior)
+  return(qnorm(c((1-alpha)/2, 1-(1-alpha)/2), mean = res$mean, sd = res$sd))
+}
+```
+
+```{r}
+plot_priorpost <- function(y, sd_y, mean_muprior, sd_muprior){
+  post <- summ(y = y, sd_y = sd_y, mean_muprior = mean_muprior, sd_muprior = sd_muprior)
+
+  prior_dens <- function(x) dnorm(x, mean = mean_muprior , sd = sd_muprior)
+  post_dens <- function(x) dnorm(x, mean = post$mean, sd = post$sd )
+  like <- function(x) dnorm(x, mean = y, sd = sd_y)
+
+  myprettyplot <- ggplot(NULL, aes(c(
+          min(post$mean - 3*post$sd, y - 3*sd_y, mean_muprior - 3*sd_muprior), 
+          max(post$mean + 3*post$sd, y + 3*sd_y, mean_muprior + 3*sd_muprior) 
+          ))) + 
+      geom_area(stat = "function", fun = prior_dens, fill = "red", alpha = 0.1) + 
+      geom_area(stat = "function", fun = like, fill = "green", alpha = 0.1) + 
+      geom_area(stat = "function", fun = post_dens, fill = "blue", alpha = 0.1) + 
+      geom_line(stat = "function", fun = prior_dens, color = "red", linetype = "solid", linewidth = 1.5) +
+      geom_line(stat = "function", fun = like, linetype = "dotdash", color = "green", linewidth = 1.5) +
+      geom_line(stat = "function", fun = post_dens, linetype = "longdash", color = "blue", linewidth = 1.5) +
+      theme_minimal(base_size = 21) +
+      ylab("Density") +
+      xlab(expression(mu)) 
+
+  return(myprettyplot)
+}
+```
+
+# Example plots 
+
+```{r}
+plot_priorpost(y = 0.3, sd_y = 0.05, mean_muprior = 0.5, sd_muprior = 0.1)
+```
+
+```{r}
+plot_priorpost(y = 0.3, sd_y = 0.1, mean_muprior = 0.5, sd_muprior = 0.1)
+```
+
+```{r}
+plot_priorpost(y = 0.3, sd_y = 0.01, mean_muprior = 0.5, sd_muprior = 0.1)
+```
+
+
+
+# Summarize the posterior
+
+Get mean and posterior standard deviation
+```{r}
+res <- summ(y = 0.3, sd_y = 0.05, mean_muprior = 0.5, sd_muprior = 0.1)
+res
+```
+
+
+95% credible interval 
+```{r}
+get_ci(y = 0.3, sd_y = 0.05, mean_muprior = 0.5, sd_muprior = 0.1)
+```
+
+or 80% credible interval
+```{r}
+get_ci(y = 0.3, sd_y = 0.05, mean_muprior = 0.5, sd_muprior = 0.1, alpha = 0.8)
+```
+
+
+
+
+
+
