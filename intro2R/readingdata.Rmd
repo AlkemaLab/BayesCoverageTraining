@@ -1,0 +1,67 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+In this notebook, we will do things..
+- load some packages
+- discuss directories
+- read data 
+- make a plot using ggplot 
+
+
+Some package we will use (install these if you haven't already)
+```{r}
+library(tidyverse)
+library(here)
+library(ggplot2)
+```
+# A note on directories
+
+Where does here() point to?
+```{r}
+here::here()
+here::here("data")
+```
+
+```{r}
+dat <- read_csv(here::here("data", "prob_simu1.csv"))
+```
+The data is now loaded into the variable `dat`, which is a particular data frame called a tibble. Let's take a look at it.
+```{r}
+dat
+```
+
+manipulation using dplyr 
+
+add a new column using mutate
+```{r}
+dat %>% 
+  mutate(prob_rounded = round(prob, 2))
+```
+
+filter the data
+```{r}
+dat %>% 
+  filter(prob > 0.5)
+```
+
+
+
+
+
+# Data visualization
+
+In this training, you will be provided with code to make plots. This section introduces the kind of code that you may see. 
+
+
+Let's start by making a histogram of our data, how would that work?
+
+```{r}
+dat %>% # we start with the tibble 
+  ggplot(aes(x = prob)) +
+  geom_histogram()
+```
+
