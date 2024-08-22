@@ -1,0 +1,127 @@
+---
+title: "Brms - getting started"
+author: "Leontine Alkema"
+date: "August 21, 2024"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggplot2)
+```
+
+# Installation
+
+See instructions in slide set. Once installed, you should be able to load the brms library:
+
+```{r}
+library(brms)
+```
+
+We will also use the posterior package to summarize the output:
+
+```{r}
+library(posterior)
+```
+
+# Example 1: use $n$ data points with unknown variance
+
+Step 1: simulate data
+
+```{r}
+set.seed(123) # to make sure we get the same data every time
+n <- 100 # number of data points
+y <- rnorm(n, 0, 1) # generate n data points from a normal distribution with mean 0 and sd 1
+hist(y)
+```
+
+We'll just store the data in an object called dat
+
+```{r}
+dat <- tibble(y = y)
+```
+
+Now let's do some model fitting using brm! We use default priors. 
+(Note: adding cache = TRUE in R chunk to avoid having to refit every time you knit the document).
+
+```{r,  cache = TRUE}
+fit <- brm(y ~ 1, # formula to state we want to estimate the mean 
+                  # we'll discuss formula in more detail in the next module
+           data = dat, # passing in the data 
+           seed = 12345, # making the fit reproducible
+           chains = 4, cores = getOption("mc.cores", 4) 
+           # 4 chains run in parallel on 4 cores
+           )
+```
+
+Let's check the output. The standard summary function gives estimates of all parameters and some diagnostics. Can you find the estimate for $\mu$? and its diagnostics? 
+```{r}
+summary(fit)
+```
+
+You can also pull out whatever you're interested in using the summarise_draws function, e.g.
+```{r}
+draws <- as_draws_array(fit, variable = "Intercept") # this is our mu
+summarise_draws(draws, default_summary_measures())
+```
+
+To get a 95% CI:
+```{r}
+summarise_draws(draws, ~quantile(.x, probs = c(0.025, 0.975)))
+```
+
+These overview plots show, for each parameter, its histogram with posterior samples and its trace plot.
+```{r}
+plot(fit, variable = c("Intercept", "sigma"))
+```
+
+# Example 2: everything is normal
+
+Let $y|\mu \sim N(\mu, s_y^2)$, with $s_y$ known, and set prior $\mu \sim N(m_0, s_0^2)$.
+
+Here is a function that calls brm to fit the Bayesian model, using the following argument names:
+
+-   y_observed for the observed value y,
+-   sd_y for its SD,
+-   and mean_muprior, sd_muprior for the prior mean and SD of $\mu$.
+
+```{r}
+fit_brm_normalnormal <- function(y_observed, sd_y, mean_muprior, sd_muprior){
+  mu_prior <- set_prior(paste0("normal(", mean_muprior, ",", sd_muprior, ")"), class = "Intercept")
+  sigma_fixed <- set_prior(paste0("constant(", sd_y, ")"), class = "sigma")
+  fit  <- brm(y ~ 1, family = gaussian(), data = tibble(y = y_observed), 
+              cores = getOption("mc.cores", 4),
+              seed = 12345, 
+              prior = c(mu_prior, sigma_fixed)
+              )
+  return(fit)
+}
+```
+
+Let's fit the model using the function we just defined:
+```{r, cache = TRUE}
+fit2  <- fit_brm_normalnormal(y_observed = 0.3, sd_y = 0.05, mean_muprior = 0.5, sd_muprior = 0.1)
+```
+
+Note that we fixed sigma so it's not estimated. 
+```{r}
+summary(fit2)
+```
+
+```{r}
+plot(fit2, variable = c("Intercept"))
+```
+
+Are these results the same as when using the closed-form expression?
+```{r}
+draws <- as_draws_array(fit2, variable = "Intercept") # this is our mu
+summarise_draws(draws, default_summary_measures())
+```
+To get a 95% CI:
+```{r}
+summarise_draws(draws, ~quantile(.x, probs = c(0.025, 0.975)))
+```
+The End!
