@@ -1,0 +1,110 @@
+---
+title: "Brms - fitting regression models"
+author: "Leontine Alkema"
+date: "August 28, 2024"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+Make sure you try out brms_gettingstarted.Rmd first!
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggplot2)
+library(brms)
+library(posterior)
+```
+
+
+# Example 1: linear regression
+
+Step 1: simulate data
+
+We simulate data from a simple linear regression model. The model is specified as follows
+$y_i \sim N(\mu, \sigma^2)$, where $\mu = \beta_0 + \beta_1\cdot x_i$, with $x_i$ the covariate value for the $i$th data point. 
+
+```{r}
+n <- 100 # number of data points
+beta0 <- 1 # intercept
+beta1 <- 2 # slope
+set.seed(124) # to make sure we get the same data every time
+mycov <- rnorm(n, 0, 1) # generate covariate values from a normal distribution with mean 0 and sd 1
+y <- rnorm(n, beta0 + beta1*mycov, 1) # generate data from a normal distribution with mean beta0 + beta1*x and sd 1
+dat <- tibble(y = y, mycov = mycov) # store the data in a tibble
+```
+
+A little plot to see what the data looks like
+```{r}
+dat %>%
+  ggplot(aes(x = mycov, y = y)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+
+Now let's do some model fitting using brm! 
+
+We specify what model we want to fit in brm using its arguments. We focus here on the formula and family arguments.
+
+The family argument specifies the distribution of the dependent variable, i.e. our data points $y$. It defaults to a normal density, i.e, $y \sim N(\mu, \sigma^2)$, and assumes an identity link function (i.e., the mean is a linear function of covariates), which is what we use in this example. This argument can also used to specify other densities and/or non-default link functions, see Example 2. 
+
+For the normal distribution, the formula specifies how the mean $\mu$ of the normal density depends on covariates. The response variable is on the left-hand-side and on the right-hand-side, the predictors for the mean are included. The formula used below is given by y ~ mycov, which means that the data are given by the y's and the mean $\mu$ is a linear function of mycov. 
+
+In the fitting, we use default priors. We add cache = TRUE in the R chunk to avoid having to refit every time you knit the document.
+
+```{r,  cache = TRUE}
+fit <- brm(y ~ mycov, # formula
+           data = dat, # passing in the data 
+           seed = 12345, # making the fit reproducible
+           chains = 4, cores = getOption("mc.cores", 4) 
+           # 4 chains run in parallel on 4 cores
+           )
+```
+
+Let's check the output. The standard summary function gives estimates of all parameters and some diagnostics. Do the MCMC diagnostics look ok? Compare the estimates of the intercept, slope, and error variance to their true values, are they close?
+
+```{r}
+summary(fit)
+```
+
+
+
+
+## Just for fun: compare the Bayesian estimates to Frequentist/tradtional estimates
+
+Here is a fit based on a frequentist/traditional estimation approach: 
+```{r}
+fit_lm <-  lm(y ~ mycov, data = dat) 
+summary(fit_lm)
+```
+
+output in a nice form: 
+```{r}
+fit_lm %>%
+  broom::tidy(conf.int = TRUE, conf.level = 0.95) %>%
+  select(-statistic, -p.value) #%>%
+#  knitr::kable(format = "latex", digits = 2)
+
+```
+Are the results similar? 
+
+
+
+
+# Example 2: Poisson regression
+
+We are not limited to just regression models using normally distributed data! We can also fit models with different data. For example, see the example on the brms website using Poisson regression: https://github.com/paul-buerkner/brms. Fitting code copied here, we will discuss the specification of a hierachical (or multilevel) model using (1|patient) in the next module. 
+
+```{r,  cache = TRUE}
+fit1 <- brm(count ~ zAge + zBase * Trt + (1|patient),
+            data = epilepsy, family = poisson())
+```
+
+```{r}
+summary(fit1)
+```
+
+
