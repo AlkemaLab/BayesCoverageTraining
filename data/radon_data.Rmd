@@ -1,0 +1,70 @@
+---
+title: "Radon data"
+author: "Leontine Alkema"
+date: "September 5, 2024"
+output: html_notebook
+---
+
+I uploaded in the repo a data set called "radon.csv" that contains the radon data used in course material. The data were obtained through the links indicated in the code below, with some processing steps. 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(tidyverse)
+```
+
+# data
+
+house level data
+```{r}
+d0 <- read.table(url("http://www.stat.columbia.edu/~gelman/arm/examples/radon/srrs2.dat"), 
+                header=T, sep=",")
+```
+
+county level data
+```{r}
+cty <- read.table(url("http://www.stat.columbia.edu/~gelman/arm/examples/radon/cty.dat"), 
+                  header = T, sep = ",")
+```
+
+
+
+# processing 
+
+The variables we want
+- activity is response variable of interest
+- county gives county name (fips gives the unique county ID)
+- floor
+- ura_county = county level uranium 
+
+
+process county data:
+```{r}
+cty <- 
+  cty %>% 
+  mutate(fips = 1000 * stfips + ctfips) %>% 
+  dplyr::select(fips, Uppm) %>%
+  rename(ura_county = (Uppm))
+```
+
+select MN, deal with zeroes, create fips, select variables, and combine with county data
+```{r}
+dat <- d0 %>% 
+  filter(state=="MN") %>% # Minnesota data only
+  mutate(activity = ifelse(activity==0, 0.1, activity)) %>% 
+  mutate(fips = stfips * 1000 + cntyfips) %>%   
+  dplyr::select(fips, county, floor, activity) %>%
+  left_join(cty) 
+```
+
+```{r}
+dat
+```
+
+```{r}
+write_csv(dat, here::here("data/radon.csv"))
+```
+
+
+
+
+
