@@ -1,0 +1,233 @@
+division_numeric_code,name_country,name_region,name_sub_region,region_numeric_code,sub_region_numeric_code,is_developed_region,is_less_developed_region,is_least_developed_country,is_in_sub_saharan_africa,is_unmarried_sexual_activity,is_low_population,is_fp2020,subcluster,cluster,,
+36,Australia,Oceania,Australia/New Zealand,909,927,Y,N,N,N,Y,N,N,Australasia,High-income,Australasia,High-income
+554,New Zealand,Oceania,Australia/New Zealand,909,927,Y,N,N,N,Y,N,N,Australasia,High-income,Australasia,High-income
+660,Anguilla,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,Y,N,Caribbean,LAC,,
+92,British Virgin Islands,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,Y,N,Caribbean,LAC,,
+535,"Bonaire, Sint Eustatius and Saba",Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,Y,N,Caribbean,LAC,,
+136,Cayman Islands,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,Y,N,Caribbean,LAC,,
+212,Dominica,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,Y,N,Caribbean,LAC,,
+500,Montserrat,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,Y,N,Caribbean,LAC,,
+659,Saint Kitts and Nevis,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,Y,N,Caribbean,LAC,,
+534,Sint Maarten (Dutch part),Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,Y,N,Caribbean,LAC,,
+796,Turks and Caicos Islands,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,Y,N,Caribbean,LAC,,
+28,Antigua and Barbuda,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+533,Aruba,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+44,Bahamas,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+52,Barbados,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+192,Cuba,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+531,Curaçao,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+214,Dominican Republic,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+308,Grenada,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+312,Guadeloupe,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+332,Haiti,Latin America and the Caribbean,Caribbean,904,915,N,Y,Y,N,Y,N,Y,Caribbean,LAC,Caribbean,LAC
+388,Jamaica,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+474,Martinique,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+630,Puerto Rico,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+662,Saint Lucia,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+670,Saint Vincent and the Grenadines,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+780,Trinidad and Tobago,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+850,United States Virgin Islands,Latin America and the Caribbean,Caribbean,904,915,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+188,Costa Rica,Latin America and the Caribbean,Central America,904,916,N,Y,N,N,Y,N,N,Central America,LAC,Central America,LAC
+222,El Salvador,Latin America and the Caribbean,Central America,904,916,N,Y,N,N,Y,N,N,Central America,LAC,Central America,LAC
+320,Guatemala,Latin America and the Caribbean,Central America,904,916,N,Y,N,N,Y,N,N,Central America,LAC,Central America,LAC
+340,Honduras,Latin America and the Caribbean,Central America,904,916,N,Y,N,N,Y,N,Y,Central America,LAC,Central America,LAC
+484,Mexico,Latin America and the Caribbean,Central America,904,916,N,Y,N,N,Y,N,N,Central America,LAC,Central America,LAC
+558,Nicaragua,Latin America and the Caribbean,Central America,904,916,N,Y,N,N,Y,N,Y,Central America,LAC,Central America,LAC
+591,Panama,Latin America and the Caribbean,Central America,904,916,N,Y,N,N,Y,N,N,Central America,LAC,Central America,LAC
+84,Belize,Latin America and the Caribbean,Central America,904,916,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+716,Zimbabwe,Africa,Eastern Africa,903,910,N,Y,N,Y,Y,N,Y,Southern Africa,Sub-Saharan Africa,Southern Africa,Sub-Saharan Africa
+480,Mauritius,Africa,Eastern Africa,903,910,N,Y,N,Y,Y,N,N,Southeast Asia,"South Asia, Southeast Asia, and Oceania",Southeast Asia,"South Asia, Southeast Asia, and Oceania"
+690,Seychelles,Africa,Eastern Africa,903,910,N,Y,N,Y,Y,N,N,Southeast Asia,"South Asia, Southeast Asia, and Oceania",Southeast Asia,"South Asia, Southeast Asia, and Oceania"
+108,Burundi,Africa,Eastern Africa,903,910,N,Y,Y,Y,Y,N,Y,Eastern Africa,Sub-Saharan Africa,Eastern Africa,Sub-Saharan Africa
+174,Comoros,Africa,Eastern Africa,903,910,N,Y,Y,Y,Y,N,Y,Eastern Africa,Sub-Saharan Africa,Eastern Africa,Sub-Saharan Africa
+262,Djibouti,Africa,Eastern Africa,903,910,N,Y,Y,Y,N,N,Y,Eastern Africa,Sub-Saharan Africa,Eastern Africa,Sub-Saharan Africa
+232,Eritrea,Africa,Eastern Africa,903,910,N,Y,Y,Y,Y,N,Y,Eastern Africa,Sub-Saharan Africa,Eastern Africa,Sub-Saharan Africa
+231,Ethiopia,Africa,Eastern Africa,903,910,N,Y,Y,Y,Y,N,Y,Eastern Africa,Sub-Saharan Africa,Eastern Africa,Sub-Saharan Africa
+404,Kenya,Africa,Eastern Africa,903,910,N,Y,N,Y,Y,N,Y,Eastern Africa,Sub-Saharan Africa,Eastern Africa,Sub-Saharan Africa
+450,Madagascar,Africa,Eastern Africa,903,910,N,Y,Y,Y,Y,N,Y,Eastern Africa,Sub-Saharan Africa,Eastern Africa,Sub-Saharan Africa
+454,Malawi,Africa,Eastern Africa,903,910,N,Y,Y,Y,Y,N,Y,Eastern Africa,Sub-Saharan Africa,Eastern Africa,Sub-Saharan Africa
+175,Mayotte,Africa,Eastern Africa,903,910,N,Y,N,Y,N,N,N,Eastern Africa,Sub-Saharan Africa,Eastern Africa,Sub-Saharan Africa
+508,Mozambique,Africa,Eastern Africa,903,910,N,Y,Y,Y,Y,N,Y,Eastern Africa,Sub-Saharan Africa,Eastern Africa,Sub-Saharan Africa
+638,RÈunion,Africa,Eastern Africa,903,910,N,Y,N,Y,Y,N,N,Eastern Africa,Sub-Saharan Africa,Eastern Africa,Sub-Saharan Africa
+646,Rwanda,Africa,Eastern Africa,903,910,N,Y,Y,Y,Y,N,Y,Eastern Africa,Sub-Saharan Africa,Eastern Africa,Sub-Saharan Africa
+706,Somalia,Africa,Eastern Africa,903,910,N,Y,Y,Y,N,N,Y,Eastern Africa,Sub-Saharan Africa,Eastern Africa,Sub-Saharan Africa
+728,South Sudan,Africa,Eastern Africa,903,910,N,Y,Y,Y,N,N,Y,Eastern Africa,Sub-Saharan Africa,Eastern Africa,Sub-Saharan Africa
+800,Uganda,Africa,Eastern Africa,903,910,N,Y,Y,Y,Y,N,Y,Eastern Africa,Sub-Saharan Africa,Eastern Africa,Sub-Saharan Africa
+834,United Republic of Tanzania,Africa,Eastern Africa,903,910,N,Y,Y,Y,Y,N,Y,Eastern Africa,Sub-Saharan Africa,Eastern Africa,Sub-Saharan Africa
+894,Zambia,Africa,Eastern Africa,903,910,N,Y,Y,Y,Y,N,Y,Eastern Africa,Sub-Saharan Africa,Eastern Africa,Sub-Saharan Africa
+446,"China, Macao Special Administrative Region",Asia,Eastern Asia,935,906,N,Y,N,N,Y,N,N,East Asia,East Asia,,
+158,Other non-specified areas,Asia,Eastern Asia,935,906,N,Y,N,N,Y,N,N,East Asia,East Asia,,
+496,Mongolia,Asia,Eastern Asia,935,906,N,Y,N,N,Y,N,Y,Mongolia,"Central Europe, Eastern Europe, and Central Asia",Mongolia,"Central Europe, Eastern Europe, and Central Asia"
+344,"China, Hong Kong Special Administrative Region",Asia,Eastern Asia,935,906,N,Y,N,N,Y,N,N,High-income Asia Pacific,High-income,High-income Asia Pacific,High-income
+392,Japan,Asia,Eastern Asia,935,906,Y,N,N,N,Y,N,N,High-income Asia Pacific,High-income,High-income Asia Pacific,High-income
+410,Republic of Korea,Asia,Eastern Asia,935,906,N,Y,N,N,Y,N,N,High-income Asia Pacific,High-income,High-income Asia Pacific,High-income
+156,China,Asia,Eastern Asia,935,906,N,Y,N,N,Y,N,N,East Asia,East Asia,East Asia,East Asia
+408,Democratic People's Republic of Korea,Asia,Eastern Asia,935,906,N,Y,N,N,Y,N,Y,East Asia,East Asia,East Asia,East Asia
+112,Belarus,Europe,Eastern Europe,908,923,Y,N,N,N,Y,N,N,Eastern Europe,"Central Europe, Eastern Europe, and Central Asia",Eastern Europe,"Central Europe, Eastern Europe, and Central Asia"
+498,Republic of Moldova,Europe,Eastern Europe,908,923,Y,N,N,N,Y,N,N,Eastern Europe,"Central Europe, Eastern Europe, and Central Asia",Eastern Europe,"Central Europe, Eastern Europe, and Central Asia"
+642,Romania,Europe,Eastern Europe,908,923,Y,N,N,N,Y,N,N,Eastern Europe,"Central Europe, Eastern Europe, and Central Asia",Eastern Europe,"Central Europe, Eastern Europe, and Central Asia"
+643,Russian Federation,Europe,Eastern Europe,908,923,Y,N,N,N,Y,N,N,Eastern Europe,"Central Europe, Eastern Europe, and Central Asia",Eastern Europe,"Central Europe, Eastern Europe, and Central Asia"
+804,Ukraine,Europe,Eastern Europe,908,923,Y,N,N,N,Y,N,N,Eastern Europe,"Central Europe, Eastern Europe, and Central Asia",Eastern Europe,"Central Europe, Eastern Europe, and Central Asia"
+203,Czechia,Europe,Eastern Europe,908,923,Y,N,N,N,Y,N,N,Central Europe,"Central Europe, Eastern Europe, and Central Asia",Central Europe,"Central Europe, Eastern Europe, and Central Asia"
+348,Hungary,Europe,Eastern Europe,908,923,Y,N,N,N,Y,N,N,Central Europe,"Central Europe, Eastern Europe, and Central Asia",Central Europe,"Central Europe, Eastern Europe, and Central Asia"
+616,Poland,Europe,Eastern Europe,908,923,Y,N,N,N,Y,N,N,Central Europe,"Central Europe, Eastern Europe, and Central Asia",Central Europe,"Central Europe, Eastern Europe, and Central Asia"
+703,Slovakia,Europe,Eastern Europe,908,923,Y,N,N,N,Y,N,N,Central Europe,"Central Europe, Eastern Europe, and Central Asia",Central Europe,"Central Europe, Eastern Europe, and Central Asia"
+100,Bulgaria,Europe,Eastern Europe,908,923,Y,N,N,N,Y,N,N,Balkans,"Central Europe, Eastern Europe, and Central Asia",Balkans,"Central Europe, Eastern Europe, and Central Asia"
+242,Fiji,Oceania,Melanesia,909,928,N,Y,N,N,Y,N,N,Oceania,"South Asia, Southeast Asia, and Oceania",Oceania,"South Asia, Southeast Asia, and Oceania"
+598,Papua New Guinea,Oceania,Melanesia,909,928,N,Y,N,N,Y,N,Y,Oceania,"South Asia, Southeast Asia, and Oceania",Oceania,"South Asia, Southeast Asia, and Oceania"
+90,Solomon Islands,Oceania,Melanesia,909,928,N,Y,Y,N,Y,N,Y,Oceania,"South Asia, Southeast Asia, and Oceania",Oceania,"South Asia, Southeast Asia, and Oceania"
+548,Vanuatu,Oceania,Melanesia,909,928,N,Y,Y,N,Y,N,N,Oceania,"South Asia, Southeast Asia, and Oceania",Oceania,"South Asia, Southeast Asia, and Oceania"
+540,New Caledonia,Oceania,Melanesia,909,928,N,Y,N,N,Y,N,N,Oceania,"South Asia, Southeast Asia, and Oceania",,
+316,Guam,Oceania,Micronesia,909,954,N,Y,N,N,Y,N,N,Oceania,"South Asia, Southeast Asia, and Oceania",Oceania,"South Asia, Southeast Asia, and Oceania"
+296,Kiribati,Oceania,Micronesia,909,954,N,Y,Y,N,Y,N,N,Oceania,"South Asia, Southeast Asia, and Oceania",Oceania,"South Asia, Southeast Asia, and Oceania"
+584,Marshall Islands,Oceania,Micronesia,909,954,N,Y,N,N,Y,Y,N,Oceania,"South Asia, Southeast Asia, and Oceania",,
+583,Micronesia (Federated States of),Oceania,Micronesia,909,954,N,Y,N,N,Y,N,N,Oceania,"South Asia, Southeast Asia, and Oceania",,
+520,Nauru,Oceania,Micronesia,909,954,N,Y,N,N,Y,Y,N,Oceania,"South Asia, Southeast Asia, and Oceania",,
+580,Northern Mariana Islands,Oceania,Micronesia,909,954,N,Y,N,N,Y,Y,N,Oceania,"South Asia, Southeast Asia, and Oceania",,
+585,Palau,Oceania,Micronesia,909,954,N,Y,N,N,Y,Y,N,Oceania,"South Asia, Southeast Asia, and Oceania",,
+120,Cameroon,Africa,Middle Africa,903,911,N,Y,N,Y,Y,N,Y,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+148,Chad,Africa,Middle Africa,903,911,N,Y,Y,Y,Y,N,Y,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+678,Sao Tome and Principe,Africa,Middle Africa,903,911,N,Y,Y,Y,Y,N,Y,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+24,Angola,Africa,Middle Africa,903,911,N,Y,Y,Y,Y,N,N,Central Africa,Sub-Saharan Africa,Central Africa,Sub-Saharan Africa
+140,Central African Republic,Africa,Middle Africa,903,911,N,Y,Y,Y,Y,N,Y,Central Africa,Sub-Saharan Africa,Central Africa,Sub-Saharan Africa
+178,Congo,Africa,Middle Africa,903,911,N,Y,N,Y,Y,N,Y,Central Africa,Sub-Saharan Africa,Central Africa,Sub-Saharan Africa
+180,Democratic Republic of the Congo,Africa,Middle Africa,903,911,N,Y,Y,Y,Y,N,Y,Central Africa,Sub-Saharan Africa,Central Africa,Sub-Saharan Africa
+226,Equatorial Guinea,Africa,Middle Africa,903,911,N,Y,Y,Y,Y,N,N,Central Africa,Sub-Saharan Africa,Central Africa,Sub-Saharan Africa
+266,Gabon,Africa,Middle Africa,903,911,N,Y,N,Y,Y,N,N,Central Africa,Sub-Saharan Africa,Central Africa,Sub-Saharan Africa
+12,Algeria,Africa,Northern Africa,903,912,N,Y,N,N,N,N,N,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+818,Egypt,Africa,Northern Africa,903,912,N,Y,N,N,N,N,Y,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+434,Libya,Africa,Northern Africa,903,912,N,Y,N,N,N,N,N,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+504,Morocco,Africa,Northern Africa,903,912,N,Y,N,N,N,N,N,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+729,Sudan,Africa,Northern Africa,903,912,N,Y,Y,Y,N,N,Y,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+788,Tunisia,Africa,Northern Africa,903,912,N,Y,N,N,N,N,N,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+60,Bermuda,Northern America,Northern America,905,905,Y,N,N,N,Y,Y,N,Caribbean,LAC,,
+304,Greenland,Northern America,Northern America,905,905,Y,N,N,N,Y,Y,N,High-income North America,High-income,,
+666,Saint Pierre and Miquelon,Northern America,Northern America,905,905,Y,N,N,N,Y,Y,N,High-income North America,High-income,,
+124,Canada,Northern America,Northern America,905,905,Y,N,N,N,Y,N,N,High-income North America,High-income,High-income North America,High-income
+840,United States of America,Northern America,Northern America,905,905,Y,N,N,N,Y,N,N,High-income North America,High-income,High-income North America,High-income
+208,Denmark,Europe,Northern Europe,908,924,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+246,Finland,Europe,Northern Europe,908,924,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+352,Iceland,Europe,Northern Europe,908,924,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+372,Ireland,Europe,Northern Europe,908,924,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+578,Norway,Europe,Northern Europe,908,924,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+752,Sweden,Europe,Northern Europe,908,924,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+826,United Kingdom of Great Britain and Northern Ireland,Europe,Northern Europe,908,924,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+830,Channel Islands,Europe,Northern Europe,908,924,Y,N,N,N,Y,N,N,Western Europe,High-income,,
+234,Faroe Islands,Europe,Northern Europe,908,924,Y,N,N,N,Y,Y,N,Western Europe,High-income,,
+833,Isle of Man,Europe,Northern Europe,908,924,Y,N,N,N,Y,Y,N,Western Europe,High-income,,
+440,Lithuania,Europe,Northern Europe,908,924,Y,N,N,N,Y,N,N,Central Europe,"Central Europe, Eastern Europe, and Central Asia",Central Europe,"Central Europe, Eastern Europe, and Central Asia"
+233,Estonia,Europe,Northern Europe,908,924,Y,N,N,N,Y,N,N,Baltics,"Central Europe, Eastern Europe, and Central Asia",Baltics,"Central Europe, Eastern Europe, and Central Asia"
+428,Latvia,Europe,Northern Europe,908,924,Y,N,N,N,Y,N,N,Baltics,"Central Europe, Eastern Europe, and Central Asia",Baltics,"Central Europe, Eastern Europe, and Central Asia"
+882,Samoa,Oceania,Polynesia,909,957,N,Y,N,N,Y,N,N,Oceania,"South Asia, Southeast Asia, and Oceania",Oceania,"South Asia, Southeast Asia, and Oceania"
+776,Tonga,Oceania,Polynesia,909,957,N,Y,N,N,Y,N,N,Oceania,"South Asia, Southeast Asia, and Oceania",Oceania,"South Asia, Southeast Asia, and Oceania"
+16,American Samoa,Oceania,Polynesia,909,957,N,Y,N,N,Y,Y,N,Oceania,"South Asia, Southeast Asia, and Oceania",,
+184,Cook Islands,Oceania,Polynesia,909,957,N,Y,N,N,Y,Y,N,Oceania,"South Asia, Southeast Asia, and Oceania",,
+258,French Polynesia,Oceania,Polynesia,909,957,N,Y,N,N,Y,N,N,Oceania,"South Asia, Southeast Asia, and Oceania",,
+570,Niue,Oceania,Polynesia,909,957,N,Y,N,N,Y,Y,N,Oceania,"South Asia, Southeast Asia, and Oceania",,
+772,Tokelau,Oceania,Polynesia,909,957,N,Y,N,N,Y,Y,N,Oceania,"South Asia, Southeast Asia, and Oceania",,
+798,Tuvalu,Oceania,Polynesia,909,957,N,Y,Y,N,Y,Y,N,Oceania,"South Asia, Southeast Asia, and Oceania",,
+876,Wallis and Futuna Islands,Oceania,Polynesia,909,957,N,Y,N,N,Y,Y,N,Oceania,"South Asia, Southeast Asia, and Oceania",,
+76,Brazil,Latin America and the Caribbean,South America,904,931,N,Y,N,N,Y,N,N,Tropical Latin America,LAC,Tropical Latin America,LAC
+600,Paraguay,Latin America and the Caribbean,South America,904,931,N,Y,N,N,Y,N,N,Tropical Latin America,LAC,Tropical Latin America,LAC
+32,Argentina,Latin America and the Caribbean,South America,904,931,N,Y,N,N,Y,N,N,Southern Latin America,LAC,Southern Latin America,LAC
+152,Chile,Latin America and the Caribbean,South America,904,931,N,Y,N,N,Y,N,N,Southern Latin America,LAC,Southern Latin America,LAC
+858,Uruguay,Latin America and the Caribbean,South America,904,931,N,Y,N,N,Y,N,N,Southern Latin America,LAC,Southern Latin America,LAC
+238,Falkland Islands (Malvinas),Latin America and the Caribbean,South America,904,931,N,Y,N,N,Y,Y,N,Southern Latin America,LAC,,
+170,Colombia,Latin America and the Caribbean,South America,904,931,N,Y,N,N,Y,N,N,Central America,LAC,Central America,LAC
+862,Venezuela (Bolivarian Republic of),Latin America and the Caribbean,South America,904,931,N,Y,N,N,Y,N,N,Central America,LAC,Central America,LAC
+254,French Guiana,Latin America and the Caribbean,South America,904,931,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+328,Guyana,Latin America and the Caribbean,South America,904,931,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+740,Suriname,Latin America and the Caribbean,South America,904,931,N,Y,N,N,Y,N,N,Caribbean,LAC,Caribbean,LAC
+68,Bolivia (Plurinational State of),Latin America and the Caribbean,South America,904,931,N,Y,N,N,Y,N,Y,Andean Latin America,LAC,Andean Latin America,LAC
+218,Ecuador,Latin America and the Caribbean,South America,904,931,N,Y,N,N,Y,N,N,Andean Latin America,LAC,Andean Latin America,LAC
+604,Peru,Latin America and the Caribbean,South America,904,931,N,Y,N,N,Y,N,N,Andean Latin America,LAC,Andean Latin America,LAC
+462,Maldives,Asia,South-Central Asia,935,921,N,Y,N,N,N,N,N,Southeast Asia,"South Asia, Southeast Asia, and Oceania",Southeast Asia,"South Asia, Southeast Asia, and Oceania"
+144,Sri Lanka,Asia,South-Central Asia,935,921,N,Y,N,N,N,N,Y,Southeast Asia,"South Asia, Southeast Asia, and Oceania",Southeast Asia,"South Asia, Southeast Asia, and Oceania"
+50,Bangladesh,Asia,South-Central Asia,935,921,N,Y,Y,N,N,N,Y,South Asia,"South Asia, Southeast Asia, and Oceania",South Asia,"South Asia, Southeast Asia, and Oceania"
+64,Bhutan,Asia,South-Central Asia,935,921,N,Y,Y,N,N,N,Y,South Asia,"South Asia, Southeast Asia, and Oceania",South Asia,"South Asia, Southeast Asia, and Oceania"
+356,India,Asia,South-Central Asia,935,921,N,Y,N,N,N,N,Y,South Asia,"South Asia, Southeast Asia, and Oceania",South Asia,"South Asia, Southeast Asia, and Oceania"
+524,Nepal,Asia,South-Central Asia,935,921,N,Y,Y,N,N,N,Y,South Asia,"South Asia, Southeast Asia, and Oceania",South Asia,"South Asia, Southeast Asia, and Oceania"
+586,Pakistan,Asia,South-Central Asia,935,921,N,Y,N,N,N,N,Y,South Asia,"South Asia, Southeast Asia, and Oceania",South Asia,"South Asia, Southeast Asia, and Oceania"
+4,Afghanistan,Asia,South-Central Asia,935,921,N,Y,Y,N,N,N,Y,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+364,Iran (Islamic Republic of),Asia,South-Central Asia,935,921,N,Y,N,N,N,N,N,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+398,Kazakhstan,Asia,South-Central Asia,935,921,N,Y,N,N,Y,N,N,Central Asia,"Central Europe, Eastern Europe, and Central Asia",Central Asia,"Central Europe, Eastern Europe, and Central Asia"
+417,Kyrgyzstan,Asia,South-Central Asia,935,921,N,Y,N,N,Y,N,Y,Central Asia,"Central Europe, Eastern Europe, and Central Asia",Central Asia,"Central Europe, Eastern Europe, and Central Asia"
+762,Tajikistan,Asia,South-Central Asia,935,921,N,Y,N,N,N,N,Y,Central Asia,"Central Europe, Eastern Europe, and Central Asia",Central Asia,"Central Europe, Eastern Europe, and Central Asia"
+795,Turkmenistan,Asia,South-Central Asia,935,921,N,Y,N,N,N,N,N,Central Asia,"Central Europe, Eastern Europe, and Central Asia",Central Asia,"Central Europe, Eastern Europe, and Central Asia"
+860,Uzbekistan,Asia,South-Central Asia,935,921,N,Y,N,N,N,N,Y,Central Asia,"Central Europe, Eastern Europe, and Central Asia",Central Asia,"Central Europe, Eastern Europe, and Central Asia"
+704,Viet Nam,Asia,South-Eastern Asia,935,920,N,Y,N,N,N,N,Y,Vietnam,East Asia,Vietnam,East Asia
+116,Cambodia,Asia,South-Eastern Asia,935,920,N,Y,Y,N,N,N,Y,Southeast Asia,"South Asia, Southeast Asia, and Oceania",Southeast Asia,"South Asia, Southeast Asia, and Oceania"
+360,Indonesia,Asia,South-Eastern Asia,935,920,N,Y,N,N,N,N,Y,Southeast Asia,"South Asia, Southeast Asia, and Oceania",Southeast Asia,"South Asia, Southeast Asia, and Oceania"
+418,Lao People's Democratic Republic,Asia,South-Eastern Asia,935,920,N,Y,Y,N,N,N,Y,Southeast Asia,"South Asia, Southeast Asia, and Oceania",Southeast Asia,"South Asia, Southeast Asia, and Oceania"
+458,Malaysia,Asia,South-Eastern Asia,935,920,N,Y,N,N,N,N,N,Southeast Asia,"South Asia, Southeast Asia, and Oceania",Southeast Asia,"South Asia, Southeast Asia, and Oceania"
+104,Myanmar,Asia,South-Eastern Asia,935,920,N,Y,Y,N,N,N,Y,Southeast Asia,"South Asia, Southeast Asia, and Oceania",Southeast Asia,"South Asia, Southeast Asia, and Oceania"
+608,Philippines,Asia,South-Eastern Asia,935,920,N,Y,N,N,Y,N,Y,Southeast Asia,"South Asia, Southeast Asia, and Oceania",Southeast Asia,"South Asia, Southeast Asia, and Oceania"
+764,Thailand,Asia,South-Eastern Asia,935,920,N,Y,N,N,Y,N,N,Southeast Asia,"South Asia, Southeast Asia, and Oceania",Southeast Asia,"South Asia, Southeast Asia, and Oceania"
+626,Timor-Leste,Asia,South-Eastern Asia,935,920,N,Y,Y,N,N,N,Y,Southeast Asia,"South Asia, Southeast Asia, and Oceania",Southeast Asia,"South Asia, Southeast Asia, and Oceania"
+96,Brunei Darussalam,Asia,South-Eastern Asia,935,920,N,Y,N,N,N,N,N,High-income Asia Pacific,High-income,High-income Asia Pacific,High-income
+702,Singapore,Asia,South-Eastern Asia,935,920,N,Y,N,N,Y,N,N,High-income Asia Pacific,High-income,High-income Asia Pacific,High-income
+72,Botswana,Africa,Southern Africa,903,913,N,Y,N,Y,Y,N,N,Southern Africa,Sub-Saharan Africa,Southern Africa,Sub-Saharan Africa
+426,Lesotho,Africa,Southern Africa,903,913,N,Y,Y,Y,Y,N,Y,Southern Africa,Sub-Saharan Africa,Southern Africa,Sub-Saharan Africa
+516,Namibia,Africa,Southern Africa,903,913,N,Y,N,Y,Y,N,N,Southern Africa,Sub-Saharan Africa,Southern Africa,Sub-Saharan Africa
+710,South Africa,Africa,Southern Africa,903,913,N,Y,N,Y,Y,N,N,Southern Africa,Sub-Saharan Africa,Southern Africa,Sub-Saharan Africa
+748,Swaziland,Africa,Southern Africa,903,913,N,Y,N,Y,Y,N,N,Southern Africa,Sub-Saharan Africa,Southern Africa,Sub-Saharan Africa
+300,Greece,Europe,Southern Europe,908,925,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+380,Italy,Europe,Southern Europe,908,925,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+470,Malta,Europe,Southern Europe,908,925,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+620,Portugal,Europe,Southern Europe,908,925,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+724,Spain,Europe,Southern Europe,908,925,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+20,Andorra,Europe,Southern Europe,908,925,Y,N,N,N,Y,Y,N,Western Europe,High-income,,
+292,Gibraltar,Europe,Southern Europe,908,925,Y,N,N,N,Y,Y,N,Western Europe,High-income,,
+336,Holy See,Europe,Southern Europe,908,925,Y,N,N,N,Y,Y,N,Western Europe,High-income,,
+674,San Marino,Europe,Southern Europe,908,925,Y,N,N,N,Y,Y,N,Western Europe,High-income,,
+191,Croatia,Europe,Southern Europe,908,925,Y,N,N,N,Y,N,N,Central Europe,"Central Europe, Eastern Europe, and Central Asia",Central Europe,"Central Europe, Eastern Europe, and Central Asia"
+705,Slovenia,Europe,Southern Europe,908,925,Y,N,N,N,Y,N,N,Central Europe,"Central Europe, Eastern Europe, and Central Asia",Central Europe,"Central Europe, Eastern Europe, and Central Asia"
+8,Albania,Europe,Southern Europe,908,925,Y,N,N,N,Y,N,N,Balkans,"Central Europe, Eastern Europe, and Central Asia",Balkans,"Central Europe, Eastern Europe, and Central Asia"
+70,Bosnia and Herzegovina,Europe,Southern Europe,908,925,Y,N,N,N,Y,N,N,Balkans,"Central Europe, Eastern Europe, and Central Asia",Balkans,"Central Europe, Eastern Europe, and Central Asia"
+499,Montenegro,Europe,Southern Europe,908,925,Y,N,N,N,Y,N,N,Balkans,"Central Europe, Eastern Europe, and Central Asia",Balkans,"Central Europe, Eastern Europe, and Central Asia"
+688,Serbia,Europe,Southern Europe,908,925,Y,N,N,N,Y,N,N,Balkans,"Central Europe, Eastern Europe, and Central Asia",Balkans,"Central Europe, Eastern Europe, and Central Asia"
+807,The former Yugoslav Republic of Macedonia,Europe,Southern Europe,908,925,Y,N,N,N,Y,N,N,Balkans,"Central Europe, Eastern Europe, and Central Asia",Balkans,"Central Europe, Eastern Europe, and Central Asia"
+204,Benin,Africa,Western Africa,903,914,N,Y,Y,Y,Y,N,Y,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+854,Burkina Faso,Africa,Western Africa,903,914,N,Y,Y,Y,Y,N,Y,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+132,Cabo Verde,Africa,Western Africa,903,914,N,Y,N,Y,Y,N,N,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+384,Côte d'Ivoire,Africa,Western Africa,903,914,N,Y,N,Y,Y,N,Y,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+270,Gambia,Africa,Western Africa,903,914,N,Y,Y,Y,Y,N,Y,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+288,Ghana,Africa,Western Africa,903,914,N,Y,N,Y,Y,N,Y,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+324,Guinea,Africa,Western Africa,903,914,N,Y,Y,Y,Y,N,Y,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+624,Guinea-Bissau,Africa,Western Africa,903,914,N,Y,Y,Y,Y,N,Y,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+430,Liberia,Africa,Western Africa,903,914,N,Y,Y,Y,Y,N,Y,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+466,Mali,Africa,Western Africa,903,914,N,Y,Y,Y,Y,N,Y,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+478,Mauritania,Africa,Western Africa,903,914,N,Y,Y,Y,N,N,Y,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+562,Niger,Africa,Western Africa,903,914,N,Y,Y,Y,N,N,Y,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+566,Nigeria,Africa,Western Africa,903,914,N,Y,N,Y,Y,N,Y,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+686,Senegal,Africa,Western Africa,903,914,N,Y,Y,Y,Y,N,Y,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+694,Sierra Leone,Africa,Western Africa,903,914,N,Y,Y,Y,Y,N,Y,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+768,Togo,Africa,Western Africa,903,914,N,Y,Y,Y,Y,N,Y,Western Africa,Sub-Saharan Africa,Western Africa,Sub-Saharan Africa
+654,Saint Helena,Africa,Western Africa,903,914,N,Y,N,Y,Y,Y,N,Western Africa,Sub-Saharan Africa,,
+196,Cyprus,Asia,Western Asia,935,922,N,Y,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+376,Israel,Asia,Western Asia,935,922,N,Y,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+48,Bahrain,Asia,Western Asia,935,922,N,Y,N,N,N,N,N,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+368,Iraq,Asia,Western Asia,935,922,N,Y,N,N,N,N,Y,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+400,Jordan,Asia,Western Asia,935,922,N,Y,N,N,N,N,N,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+414,Kuwait,Asia,Western Asia,935,922,N,Y,N,N,N,N,N,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+422,Lebanon,Asia,Western Asia,935,922,N,Y,N,N,N,N,N,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+512,Oman,Asia,Western Asia,935,922,N,Y,N,N,N,N,N,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+634,Qatar,Asia,Western Asia,935,922,N,Y,N,N,N,N,N,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+682,Saudi Arabia,Asia,Western Asia,935,922,N,Y,N,N,N,N,N,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+275,State of Palestine,Asia,Western Asia,935,922,N,Y,N,N,N,N,Y,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+760,Syrian Arab Republic,Asia,Western Asia,935,922,N,Y,N,N,N,N,N,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+792,Turkey,Asia,Western Asia,935,922,N,Y,N,N,N,N,N,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+784,United Arab Emirates,Asia,Western Asia,935,922,N,Y,N,N,N,N,N,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+887,Yemen,Asia,Western Asia,935,922,N,Y,Y,N,N,N,Y,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East,North Africa and Middle East
+51,Armenia,Asia,Western Asia,935,922,N,Y,N,N,N,N,N,Caucasus,"Central Europe, Eastern Europe, and Central Asia",Caucasus,"Central Europe, Eastern Europe, and Central Asia"
+31,Azerbaijan,Asia,Western Asia,935,922,N,Y,N,N,N,N,N,Caucasus,"Central Europe, Eastern Europe, and Central Asia",Caucasus,"Central Europe, Eastern Europe, and Central Asia"
+268,Georgia,Asia,Western Asia,935,922,N,Y,N,N,Y,N,N,Caucasus,"Central Europe, Eastern Europe, and Central Asia",Caucasus,"Central Europe, Eastern Europe, and Central Asia"
+40,Austria,Europe,Western Europe,908,926,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+56,Belgium,Europe,Western Europe,908,926,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+250,France,Europe,Western Europe,908,926,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+276,Germany,Europe,Western Europe,908,926,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+442,Luxembourg,Europe,Western Europe,908,926,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+528,Netherlands,Europe,Western Europe,908,926,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+756,Switzerland,Europe,Western Europe,908,926,Y,N,N,N,Y,N,N,Western Europe,High-income,Western Europe,High-income
+438,Liechtenstein,Europe,Western Europe,908,926,Y,N,N,N,Y,Y,N,Western Europe,High-income,,
+492,Monaco,Europe,Western Europe,908,926,Y,N,N,N,Y,Y,N,Western Europe,High-income,,

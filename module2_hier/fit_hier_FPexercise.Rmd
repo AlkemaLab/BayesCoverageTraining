@@ -1,0 +1,319 @@
+---
+title: "Bayesian hierarchical modeling - exercise"
+author: "Leontine Alkema"
+date: "September 9, 2024"
+output:
+  html_document:
+    df_print: paged
+  pdf_document:
+    number_sections: true
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggplot2)
+library(brms)
+library(posterior)
+library(tidybayes)
+```
+
+In this notebook, we fit a hierarchical model to FP data to estimate country-specific mCPR using data after 2018.
+Note that this is a simplified exercise, for example, we do not take account of sampling errors or the exact year that the observation refers to. It's just a start to get familiar with hierarchical models.
+
+# Read and process FP data
+
+
+```{r}
+dat0 <- read_csv(here::here("data/fpet_track20data2024.csv"), col_types = list(division_numeric_code = "c"))
+region_info <- read_csv(here::here("data/fpet_regions_all.csv"), col_types = list(division_numeric_code = "c"))
+```
+
+
+
+```{r}
+dat1 <- dat0 %>%
+  filter(start_date >= 2018) %>% # use obs after 2018
+  rename(mcpr = contraceptive_use_modern) %>%
+  filter(!is.na(mcpr), mcpr >= 0.005) %>% # remove missing values and mcpr less than 0.5% (convenience)
+  select(division_numeric_code, mcpr) %>%
+  left_join(region_info) %>% # add in country name and region info
+  select(division_numeric_code, mcpr, name_country, name_region, name_sub_region) # UNPD regions  
+dat1
+```
+
+Let's estimate mcpr on the logit-scale. We define transformation functions to make this easier.
+
+```{r}
+logit <- function(p) log(p/(1-p))
+inv_logit <- function(x) exp(x)/(1+exp(x))
+```
+
+We add y = logit(mcpr) to our data set and rename the division_numeric_code to iso for convenience.
+```{r}
+dat <- 
+  dat1 %>%
+  mutate(y = logit(mcpr)) %>%
+  rename(iso = division_numeric_code) # 'cause 3 letters are better than many
+dat
+```
+
+Create summary data set with info for each country:
+```{r}
+set.seed(12345) # used for creating jittered nobs
+
+datcountry <- dat %>%
+  group_by(iso) %>%
+  summarize(nobs = n(), ybar = mean(y), iso = iso[1], country = name_country[1]) %>%
+  mutate(nobs_jitter = nobs*exp(runif (length(nobs), -.1, .1)))
+ncountries <- dim(datcountry)[1]
+datcountry
+```
+
+Let's also calculate the overall mean:
+```{r}
+ybarbar <- mean(dat$y) 
+```
+
+A simple plot that shows the observed mean logit(mCPR) per country against the number of observations (jittered), with the overall mean as a reference line.
+```{r}
+datcountry %>% 
+  ggplot(aes(x = nobs_jitter, y = ybar)) +
+  geom_point() + 
+  geom_hline(mapping = aes(yintercept = ybarbar)) + 
+  theme_bw()
+```
+
+# Model fitting 
+
+We estimate country-specific prevalence using a hierarchical model. 
+```{r,  cache = TRUE}
+fit <- brm(y ~ (1|iso), 
+        data = dat, 
+        iter = 2000,
+        chains = 4,
+        seed = 1234, 
+      cores = getOption("mc.cores", 4))
+```
+
+Summary of model fit: 
+
+TO DO: find the estimates of the 3 model parameters and interpret the values. 
+```{r}
+summary(fit)
+```
+
+## Let's look at group-level mean parameters 
+
+To get the alpha = eta + mu_alpha, we can use the following call
+```{r, eval = F}
+coef(fit, summary = T)$iso 
+```
+
+Let's save the alphas in a tibble 
+```{r}
+alphas <-
+  coef(fit, summary = T)$iso %>% 
+  as_tibble(rownames = "iso") %>%
+  rename(alph = Estimate.Intercept)
+alphas 
+```
+
+
+
+
+In the graph below, we plot alphahat against ybar. The identity line is added too.
+
+TO DO: explain which country's estimates are furthest away from the identity line and why. 
+```{r}
+alphas %>%
+  left_join(datcountry, by = c("iso" = "iso")) %>%
+  ggplot(aes(y = alph, x = ybar, size = nobs)) +
+  geom_point() +
+  geom_abline(slope = 1, intercept = 0) +
+  theme_minimal() +
+  ylab("Estimated logit(mCPR)") +
+  xlab("Observed mean logit(mCPR)") +
+  geom_hline(yintercept = ybarbar, linetype = "dashed") 
+```
+
+
+# Approximating the hierarchical distribution
+
+In this section, we approximate the hierarchical distribution by plugging into the normal density the point estimates for the mean and variance. 
+Note that this is an approximation because we ignore uncertainty in the hierarchical model parameters. The goal is to get a better understanding of how the
+hierarchical model "works", i.e., how it introduces shrinkage. 
+
+
+## Functions
+
+Copying over the functions from the intro module to make prior-like-posterior plots in the everything-is-normal setting. 
+
+```{r}
+summ  <- function(y, sd_y, mean_muprior, sd_muprior){
+  sd_mupost <- sqrt(1/(1/sd_muprior^2 + 1/sd_y^2))
+  mean_mupost <- (mean_muprior/(sd_muprior^2) + y/(sd_y^2))*(sd_mupost^2)
+  return(tibble(mean = mean_mupost, sd = sd_mupost))
+}
+```
+
+```{r}
+get_ci <- function(y, sd_y, mean_muprior, sd_muprior, alpha = 0.95){
+  res <- summ(y = y, sd_y = sd_y, mean_muprior = mean_muprior, sd_muprior = sd_muprior)
+  return(qnorm(c((1-alpha)/2, 1-(1-alpha)/2), mean = res$mean, sd = res$sd))
+}
+```
+
+```{r}
+plot_priorpost <- function(y, sd_y, mean_muprior, sd_muprior){
+  post <- summ(y = y, sd_y = sd_y, mean_muprior = mean_muprior, sd_muprior = sd_muprior)
+
+  prior_dens <- function(x) dnorm(x, mean = mean_muprior , sd = sd_muprior)
+  post_dens <- function(x) dnorm(x, mean = post$mean, sd = post$sd )
+  like <- function(x) dnorm(x, mean = y, sd = sd_y)
+
+  myprettyplot <- ggplot(NULL, aes(c(
+          min(post$mean - 3*post$sd, y - 3*sd_y, mean_muprior - 3*sd_muprior), 
+          max(post$mean + 3*post$sd, y + 3*sd_y, mean_muprior + 3*sd_muprior) 
+          ))) + 
+      geom_area(stat = "function", fun = prior_dens, fill = "red", alpha = 0.1) + 
+      geom_area(stat = "function", fun = like, fill = "green", alpha = 0.1) + 
+      geom_area(stat = "function", fun = post_dens, fill = "blue", alpha = 0.1) + 
+      geom_line(stat = "function", fun = prior_dens, color = "red", linetype = "solid", linewidth = 1.5) +
+      geom_line(stat = "function", fun = like, linetype = "dotdash", color = "green", linewidth = 1.5) +
+      geom_line(stat = "function", fun = post_dens, linetype = "longdash", color = "blue", linewidth = 1.5) +
+      theme_minimal(base_size = 21) +
+      ylab("Density") +
+      xlab(expression(mu)) 
+
+  return(myprettyplot)
+}
+```
+
+
+## Obtain point estimates
+
+We need the point estimates for the hierarchical mean and SD, and the SD of the obs. There may be more direct ways, using the samples here:
+```{r}
+samp <- as_draws_df(fit)
+sigmay_hat <- median(samp$sigma)
+mualpha_hat <- mean(samp$Intercept)
+sigmaalpha_hat <- median(samp$sd_iso__Intercept)
+```
+
+You can compare these point estimates to the info from the summary of the fit to see that we're taking the right parameters:
+```{r}
+sigmaalpha_hat 
+mualpha_hat 
+sigmay_hat 
+```
+
+```{r}
+summary(fit)
+```
+
+
+
+## Approximating the hierarchical model set up for country examples 
+
+Let's select a country with just one survey: 
+```{r}
+datcountry %>% filter(nobs == 1)
+```
+
+```{r}
+iso_select <- 12 # algeria
+# the data for this country:
+datiso <-
+  datcountry %>% filter(iso == iso_select)
+```
+
+The plot below shows the  approximate hierarchical distribution (red), likelihood (green), and posterior (blue) for the selected country. 
+Explain what you see in the plot, e.g., is the posterior closer to the likelihood or the hierarchical distribution? Why is that? Relate that back to shrinkage, is there much shrinkage here from the sample mean to the hierarchical mean?
+```{r}
+plot_priorpost(# note that for country data, the likelihood simplifies to  ybar_j|alpha_j ~ N(alpha_j, var = sigmay_j^2/nobs_j),
+              # so that's what we use here as arguments for y and sd_y
+                y = datiso$ybar, sd_y = sigmay_hat/sqrt(datiso$nobs), 
+               mean_muprior = mualpha_hat , sd_muprior = sigmaalpha_hat)
+```
+
+We can also choose a country with more observations 
+```{r}
+datcountry %>% filter(nobs > 5)
+```
+
+```{r}
+iso_select <- 404 # kenya 
+datiso <-
+  datcountry %>% filter(iso == iso_select)
+```
+
+Again the plot below shows the  approximate hierarchical distribution (red), likelihood (green), and posterior (blue) for the selected country. 
+Explain what you see in the plot, e.g., is the posterior closer to the likelihood or the hierarchical distribution? Why is that? Relate that back to shrinkage, is there much shrinkage here from the sample mean to the hierarchical mean?
+
+Also compare and contrast this with the plot for Algeria. Is the hierarchical distribution the same? Is the likelihood the same? 
+
+```{r}
+plot_priorpost(# note that for country data, the likelihood simplifies to  ybar_j|alpha_j ~ N(alpha_j, var = sigmay_j^2/nobs_j),
+              # so that's what we use here as arguments for y and sd_y
+                  y = datiso$ybar, sd_y = sigmay_hat/sqrt(datiso$nobs), 
+                  mean_muprior = mualpha_hat , sd_muprior = sigmaalpha_hat)
+```
+
+
+Aside on the approximation: we can compare our approximation to the true posterior for the country. 
+Here is the CI based on the approximation, followed by the CI based on the exact posterior.
+```{r}
+get_ci(y = datiso$ybar, sd_y = sigmay_hat/sqrt(datiso$nobs), mean_muprior = mualpha_hat , sd_muprior = sigmaalpha_hat)
+```
+
+```{r}
+alphas[alphas$iso == iso_select,]
+```
+
+
+# Some more visuals of country estimates 
+
+Just a visual of some country estimates with 95% CIs:
+```{r}
+alphas %>%
+  rename(lower = `Q2.5.Intercept`, upper = `Q97.5.Intercept`) %>%
+  mutate(mcprpoint = inv_logit(alph), mcprlower = inv_logit(lower), mcprupper = inv_logit(upper)) %>%
+  left_join(region_info, by = c("iso" = "division_numeric_code")) %>% # add in country name and region info
+  filter(name_region == "Africa") %>%
+  ggplot(aes(y = mcprpoint, x = name_country)) +
+  geom_point() +
+  theme_minimal() +
+  geom_errorbar(aes(ymin = mcprlower, ymax = mcprupper, width = 0.2)) +
+  coord_flip() +
+  ylab("Estimated mCPR")  + xlab("")
+
+```
+In the graph above, why do you think the CIs are quite wide? Hint: remember that sigma_y does not represent the actual uncertainty in survey data, instead, it represents the variance within a country across surveys within the period. 
+
+# Adding levels of hierarchy
+
+We can extend the hierarchical model to include region-level groupings. We'll discuss this in more detail in the meeting. 
+
+```{r,  cache = TRUE}
+fit2 <- brm(y ~ (1|iso) +  (1|name_sub_region) + (1|name_region),
+        data = dat, 
+        iter = 2000, 
+        seed = 123, 
+        # this is an MCMC tuning parameter, to be discussed later 
+        control = list(adapt_delta = 0.95), 
+        chains = 4,
+        cores = getOption("mc.cores", 4))
+```
+
+
+```{r}
+summary(fit2)
+```
+
+
+
+
+
+
+
