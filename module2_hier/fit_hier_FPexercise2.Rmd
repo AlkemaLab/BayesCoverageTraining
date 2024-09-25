@@ -1,0 +1,264 @@
+---
+title: "Bayesian hierarchical modeling - exercise 2"
+author: "Leontine Alkema"
+date: "September 24, 2024"
+output:
+  pdf_document:
+    number_sections: true
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggplot2)
+library(brms)
+library(posterior)
+library(tidybayes)
+```
+
+In this notebook, we fit a hierarchical model to FP data to estimate country-year-specific mCPR using data after 2010.
+Note that this is a simplified exercise, for example, we do not take account of sampling errors and we assume that mCPR changes linearly on the logit-scale. It's just a start to get familiar with basic hierarchical-temporal models.
+
+# Read and process FP data
+
+
+```{r}
+dat0 <- read_csv(here::here("data/fpet_track20data2024.csv"), col_types = list(division_numeric_code = "c"))
+region_info <- read_csv(here::here("data/fpet_regions_all.csv"), col_types = list(division_numeric_code = "c"))
+```
+
+
+```{r}
+dat1 <- dat0 %>%
+  filter(start_date >= 2010) %>% # use obs after 2010
+  filter(is_in_union == "Y") %>% # married women! 
+  rename(mcpr = contraceptive_use_modern) %>%
+  mutate(year = 1/2*(start_date + end_date)) %>% # define survey year as midpoint 
+  filter(!is.na(mcpr), mcpr >= 0.005) %>% # for keeping things simple, remove missing values and mcpr less than 0.5% (convenience)
+  select(division_numeric_code, mcpr, year) %>%
+  left_join(region_info) %>% # add in country name and region info
+  select(division_numeric_code, mcpr, 
+        year,
+         name_country, name_region, name_sub_region) %>% # UNPD regions  
+  filter(name_region == "Africa") # here we focus just on countries in Africa
+dat1
+```
+
+Let's estimate mcpr on the logit-scale. We define transformation functions to make this easier.
+
+```{r}
+logit <- function(p) log(p/(1-p))
+inv_logit <- function(x) exp(x)/(1+exp(x))
+```
+
+We add y = logit(mcpr) to our data set and rename the division_numeric_code to iso for convenience.
+```{r}
+dat <- 
+  dat1 %>%
+  mutate(y = logit(mcpr)) %>%
+  rename(iso = division_numeric_code) %>%  # 'cause 3 letters are better than many
+  mutate(yearmin2016 = year - 2016) # we also add variable yearmin2016 which is year - 2016
+dat
+```
+
+Create summary data set with info for each country:
+```{r}
+set.seed(12345) # used for creating jittered nobs
+datcountry <- dat %>%
+  group_by(iso) %>%
+  summarize(nobs = n(), ybar = mean(y), iso = iso[1], country = name_country[1],
+            name_region = name_region[1], name_sub_region = name_sub_region[1]) %>%
+  mutate(nobs_jitter = nobs*exp(runif (length(nobs), -.1, .1)))
+ncountries <- dim(datcountry)[1]
+datcountry
+```
+
+
+# Model fitting 
+
+Fit0 is just estimating country mean levels over the period since 2010
+```{r,  cache = TRUE}
+fit0 <- brm(y ~ (1|iso), 
+        data = dat, 
+        iter = 4000, warmup = 1000, 
+        seed = 1234, 
+      cores = getOption("mc.cores", 4))
+```
+
+```{r}
+summary(fit0)
+```
+
+
+We estimate country-year-specific prevalence using a hierarchical model with country-specific means and shared slopes. 
+```{r,  cache = TRUE}
+fit <- brm(y ~ (1|iso) + yearmin2016, 
+        data = dat, 
+        iter = 4000, # adding some more iterations to avoid low effective sample size per chain
+        warmup = 1000,
+        chains = 4,
+         # this is an MCMC tuning parameter, to be discussed later 
+       # control = list(adapt_delta = 0.95), 
+        seed = 1234, 
+      cores = getOption("mc.cores", 4))
+```
+
+Summary of model fit: 
+```{r}
+summary(fit)
+```
+
+Make rates of change country-specific and add an extra level in the hierarchy
+
+```{r,  cache = TRUE}
+fit2 <- brm(y ~ (1 + yearmin2016|iso) +  (1 + yearmin2016|name_sub_region),
+        data = dat, 
+        iter = 2000, 
+        seed = 123, 
+        # this is an MCMC tuning parameter, to be discussed later 
+        control = list(adapt_delta = 0.99, max_treedepth = 14), 
+        chains = 4,
+        cores = getOption("mc.cores", 4))
+```
+
+```{r}
+summary(fit2)
+```
+
+# Explore output
+
+
+Select a country and years of interest
+```{r}
+namec <- "Ethiopia"
+predyears <- 2010:2025 # years of interest
+```
+
+To produce the estimates, we just need a data frame with the same variables as used in the formula (ie predictors of outcome mu_ct). 
+Easiest to take one row from the countrydat and add all years of interest as yearmin2016 
+```{r}
+preddat <- tibble(
+  datcountry %>% filter(country == namec),
+  yearmin2016 = predyears - 2016)
+preddat
+```
+
+We can use the posterior_epred function to create estimates of mcpr over time for a specific country. 
+This function just uses the function and wrangles the output into a more convenient format. 
+We also save 3 random posterior samples to be able to add those to the plot. 
+
+```{r}
+get_est <- function(fit, preddat, predyears) {
+  nsamples <- 3
+  mcpr_st <- inv_logit(posterior_epred(fit, newdata = preddat))
+  set.seed(123456) # for obtaining just a few random posterior samples
+  samp_index <- sample(1:nrow(mcpr_st), nsamples)
+  colnames(mcpr_st) <- predyears
+  est <- bind_cols(mcpr_st, tibble(sample = 1:nrow(mcpr_st))) %>%
+    pivot_longer(cols = -sample, names_to = "year", values_to = "value") %>%
+      mutate(year = as.numeric(year)) %>%
+    group_by(year) %>%
+    reframe(low = quantile(value, 0.025), 
+              median = quantile(value, 0.5), 
+              up = quantile(value, 0.975),
+            # some hard coding here, probably a better way!
+              samp1 = value[samp_index[1]],
+                        samp2 = value[samp_index[2]],
+  
+                        samp3 = value[samp_index[3]]
+  
+            ) 
+  return(est)
+}
+```
+
+
+get estimates based on the 3 models 
+```{r}
+est0 <- get_est(fit0, preddat, predyears)
+est <- get_est(fit, preddat, predyears)
+est2 <- get_est(fit2, preddat, predyears)
+```
+
+
+Example output
+```{r}
+est 
+```
+
+Plot 
+```{r}
+dat %>%
+  filter(name_country == namec) %>%
+  ggplot(aes(x = year, y = mcpr)) +
+  ggplot2::geom_ribbon(data = est, 
+    aes(ymin = `low`, y = median, ymax = `up`), fill  = "blue", alpha = 0.1) +
+ geom_line(data = est, aes(x = year, y = median), color = "blue") +
+ geom_line(data = est, aes(x = year, y = samp1), color = "darkgrey") +
+ geom_line(data = est, aes(x = year, y = samp2), color = "darkgrey") +
+ geom_line(data = est, aes(x = year, y = samp3), color = "darkgrey") +
+  theme_minimal() +
+   geom_point() +
+  labs(title = namec) + # increase font sizes
+  theme(axis.text = element_text(size = 14),
+        axis.title = element_text(size = 14))
+```
+
+Plot  for model 2
+```{r}
+dat %>%
+  filter(name_country == namec) %>%
+  ggplot(aes(x = year, y = mcpr)) +
+  ggplot2::geom_ribbon(data = est2, 
+    aes(ymin = `low`, y = median, ymax = `up`), fill  = "red", alpha = 0.1) +
+ geom_line(data = est2, aes(x = year, y = median), color = "red") +
+ geom_line(data = est2, aes(x = year, y = samp1), color = "darkgrey") +
+ geom_line(data = est2, aes(x = year, y = samp2), color = "darkgrey") +
+ geom_line(data = est2, aes(x = year, y = samp3), color = "darkgrey") +
+  theme_minimal() +
+   geom_point() +
+  labs(title = namec) + # increase font sizes
+  theme(axis.text = element_text(size = 14),
+        axis.title = element_text(size = 14))
+```
+
+Plot  for model 0
+```{r}
+dat %>%
+  filter(name_country == namec) %>%
+  ggplot(aes(x = year, y = mcpr)) +
+  ggplot2::geom_ribbon(data = est0, 
+    aes(ymin = `low`, y = median, ymax = `up`), fill  = "blue", alpha = 0.1) +
+ geom_line(data = est0, aes(x = year, y = median), color = "blue") +
+ geom_line(data = est0, aes(x = year, y = samp1), color = "darkgrey") +
+ geom_line(data = est0, aes(x = year, y = samp2), color = "darkgrey") +
+ geom_line(data = est0, aes(x = year, y = samp3), color = "darkgrey") +
+  theme_minimal() +
+   geom_point() +
+  labs(title = namec) + # increase font sizes
+  theme(axis.text = element_text(size = 14),
+        axis.title = element_text(size = 14))
+```
+
+Plot with two fits
+
+```{r}
+dat %>%
+  filter(name_country == namec) %>%
+  ggplot(aes(x = year, y = mcpr)) +
+  ggplot2::geom_ribbon(data = est, 
+    aes(ymin = `low`, y = median, ymax = `up`), fill  = "blue", alpha = 0.1) +
+ geom_line(data = est, aes(x = year, y = median), color = "blue") +
+  ggplot2::geom_ribbon(data = est2, 
+    aes(ymin = `low`, y = median, ymax = `up`), fill  = "red", alpha = 0.1) +
+ geom_line(data = est2, aes(x = year, y = median), color = "red") +
+  theme_minimal() +
+   geom_point() +
+  labs(title = namec) + # increase font sizes
+  theme(axis.text = element_text(size = 14),
+        axis.title = element_text(size = 14))
+```
+
+
