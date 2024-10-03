@@ -1,5 +1,5 @@
 ---
-title: "Bayesian hierarchical modeling - exercise 2"
+title: "Bayesian hierarchical modeling - exercise 2 V2"
 author: "Leontine Alkema"
 date: "September 24, 2024"
 output:
@@ -113,7 +113,8 @@ summary(fit)
 Make rates of change country-specific and add an extra level in the hierarchy
 
 ```{r,  cache = TRUE}
-fit2 <- brm(y ~ (1 + yearmin2016|iso) +  (1 + yearmin2016|name_sub_region),
+fit2 <- brm(y ~ 1 + yearmin2016 + # added in the year predictor in V2
+              (1 + yearmin2016|iso) +  (1 + yearmin2016|name_sub_region)  + yearmin2016,
         data = dat, 
         iter = 2000, 
         seed = 123, 
